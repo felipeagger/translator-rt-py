@@ -14,8 +14,8 @@ process the returned transcription results as needed. This
 handler will simply print the text out to your interpreter.
 """
 
-
-translate = boto3.client(service_name='translate', region_name='us-east-1', use_ssl=True)
+region = "us-west-2"
+translate = boto3.client(service_name='translate', region_name=region, use_ssl=True)
 
 
 class MyEventHandler(TranscriptResultStreamHandler):
@@ -68,7 +68,7 @@ async def write_chunks(stream):
 
 async def basic_transcribe():
     # Setup up our client with our chosen AWS region
-    client = TranscribeStreamingClient(region="us-west-2")
+    client = TranscribeStreamingClient(region=region)
 
     # Start transcription to generate our async stream
     stream = await client.start_stream_transcription(
